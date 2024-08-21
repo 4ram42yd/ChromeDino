@@ -83,4 +83,9 @@ public class DinoController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheckPoint.position, 0.2f);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("뭔가 충돌했다!!");
+    }
 }
