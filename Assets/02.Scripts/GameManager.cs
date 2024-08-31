@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,9 @@ public class GameManager : MonoBehaviour
     private float spawnTimer;   // 스폰하기 위한 타이머(시간을 재기 위한 변수)
     public bool isSpawning;     // 스폰을 하기 위한 변수, true면 스폰 되고, false면 스폰이 되지 않는다.
     private int spawnTracker;  // 어떤 장애물을 스폰할지 픽하기 위한 변수 ( 0 : 선인장1, 1: 선인장2, 2: 선인장3, 3 : 선인장4, 4 : 익룡 )
+
+    public int mainScore;      // 실제로 게임 도중 1씩 더해질 int형 변수
+    public TextMeshProUGUI mainScore_text;         // 게임 화면의 우측 상단의 ScoreText
 
     void Start()
     {
