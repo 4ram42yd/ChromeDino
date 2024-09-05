@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private int spawnTracker;  // 어떤 장애물을 스폰할지 픽하기 위한 변수 ( 0 : 선인장1, 1: 선인장2, 2: 선인장3, 3 : 선인장4, 4 : 익룡 )
 
     public int mainScore;      // 실제로 게임 도중 1씩 더해질 int형 변수
-    public TextMeshProUGUI mainScore_text;         // 게임 화면의 우측 상단의 ScoreText
+    public TextMeshProUGUI mainScore_text;         // 게임 화면의 우측 상단의 ScoreText(TMP)오브젝트의 Text 부분을 담기 위한 변수.
 
     void Start()
     {
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
                 if (spawnTracker.Equals(4))  // 4가 나와서 익룡이 걸렸다면
                 {
-                    int randPoint = 2 + Random.Range(0, 3);  // spawnPoints중에서 배열의 index번호가 2부터 익룡 포인트기 때문에 2를 더한다( Randmom.Range(0,3)하면 나올 수 있는 수는 0,1,2 중에 1개가 나온다)
+                    int randPoint = 2 + Random.Range(0, 3);  // spawnPoints중에서 배열의 index번호가 2부터 익룡 포인트기 때문에 2를 더한다( Randmom.Range(0,3)하면 나올 수 있는 수는 0,1,2 중에 1개가 나온다 여기에 각 2를 더하게 되면, 2,3,4 중에 1개가 나온다)
 
                     Instantiate(obstacles[spawnTracker], spawnPoints[randPoint].position, spawnPoints[randPoint].rotation); // 정해진 포인트에서 생성 ( 포인트는 spawnPoints배열의 인덱스번호 2,3,4 중에 1개가 정해질 것이다)
                 }
@@ -51,5 +51,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Score_UI_Update()
+    {
+        mainScore++;   // mainScore 변수에 1을 더한다.
+        mainScore_text.text = "스코어 : " + mainScore.ToString();
     }
 }
