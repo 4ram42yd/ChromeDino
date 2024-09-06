@@ -4,11 +4,14 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform[] spawnPoints;
-    public GameObject[] obstacles;
+    public static GameManager instance; // 싱글톤 인스턴스를 저장할 정적 변수
+
+    public Transform[] spawnPoints;     // 장애물이 나올 위치 배열 변수
+    public GameObject[] obstacles;      // 장애물 오브젝트의 배열 변수
 
     public float spawnDelay;    // 스폰되는 시간 간격
     private float spawnTimer;   // 스폰하기 위한 타이머(시간을 재기 위한 변수)
@@ -17,6 +20,18 @@ public class GameManager : MonoBehaviour
 
     public int mainScore;      // 실제로 게임 도중 1씩 더해질 int형 변수
     public TextMeshProUGUI mainScore_text;         // 게임 화면의 우측 상단의 ScoreText(TMP)오브젝트의 Text 부분을 담기 위한 변수.
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this; // 인스턴스가 존재하지 않으면 현재 오브젝트를 인스턴스로 설정하고 유지
+        }
+    }
 
     void Start()
     {
@@ -52,7 +67,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
     public void Score_UI_Update()
     {
         mainScore++;   // mainScore 변수에 1을 더한다.

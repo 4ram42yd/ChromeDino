@@ -92,7 +92,7 @@ public class DinoController : MonoBehaviour
         }
         else if(collision.CompareTag("Point"))
         {
-            Debug.Log("점수 획득");
+            GameManager.instance.Score_UI_Update();  // 싱글톤을 접근 가능한 인스턴스를 통해 Score_UI_Update함수에 바로 접근.
         }
     }
 }
