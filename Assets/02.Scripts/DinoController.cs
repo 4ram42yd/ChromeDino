@@ -88,7 +88,8 @@ public class DinoController : MonoBehaviour
     {
         if(collision.CompareTag("Obstacle"))
         {
-            Debug.Log("게임 오버");
+            anim.SetTrigger("isDie");
+            GameManager.instance.GameOver();  // 싱글톤을 접근 가능한 인스턴스를 통해 GameOver함수에 바로 접근.
         }
         else if(collision.CompareTag("Point"))
         {

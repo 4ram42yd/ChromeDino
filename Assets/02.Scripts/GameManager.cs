@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +19,11 @@ public class GameManager : MonoBehaviour
 
     public int mainScore;      // 실제로 게임 도중 1씩 더해질 int형 변수
     public TextMeshProUGUI mainScore_text;         // 게임 화면의 우측 상단의 ScoreText(TMP)오브젝트의 Text 부분을 담기 위한 변수.
+
+    public GameObject gameOver_Panel;             // GameOver 윈도우 패널
+    public TextMeshProUGUI endScore_text;        // 게임이 끝났을 때 Score
+    public TextMeshProUGUI bestScore_text;       // 나의 역대 최고 점수.
+
 
     private void Awake()
     {
@@ -71,5 +75,26 @@ public class GameManager : MonoBehaviour
     {
         mainScore++;   // mainScore 변수에 1을 더한다.
         mainScore_text.text = "스코어 : " + mainScore.ToString();
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+
+        if(mainScore > PlayerPrefs.GetInt("BestScore",0)) // 현재 메인 점수가, 저장돼 있던 베스트 점수(없다면 기본값은 0)보다 높다면 
+        {
+            PlayerPrefs.SetInt("BestScore", mainScore);     // 베스트 점수에 메인 점수를 넣어주고 저장.
+        }
+
+        bestScore_text.text = "Best Score : " + PlayerPrefs.GetInt("BestScore").ToString();   // 베스트 점수는 저장되어있던 베스트 점수를 불러서 보여줌.
+        endScore_text.text = "Score : " + mainScore.ToString();  // 마지막 점수는 MainScore점수를 문자화 해서 넣어줌.
+
+        gameOver_Panel.SetActive(true);  // GameOver패널 활성화.
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // 게임오버에서 시간을 멈췄으므로 재시작 하면 다시 원래 시간으로 돌려놓아야 한다.
+        SceneManager.LoadScene("GameScene"); // 이름이 GameScene인 씬을 불러줌. (현재 씬이므로 현재 씬이 처음부터 다시 시작)
     }
 }
