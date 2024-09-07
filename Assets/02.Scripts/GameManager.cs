@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        GetComponent<AudioSource>().Play();            // Explosion 소리를 낸다.
+
         Time.timeScale = 0f;
 
         if(mainScore > PlayerPrefs.GetInt("BestScore",0)) // 현재 메인 점수가, 저장돼 있던 베스트 점수(없다면 기본값은 0)보다 높다면 
