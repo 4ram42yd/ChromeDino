@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI mainScore_text;         // 게임 화면의 우측 상단의 ScoreText(TMP)오브젝트의 Text 부분을 담기 위한 변수.
 
     public GameObject gameOver_Panel;             // GameOver 윈도우 패널
-    public TextMeshProUGUI endScore_text;        // 게임이 끝났을 때 Score
     public TextMeshProUGUI bestScore_text;       // 나의 역대 최고 점수.
+    public TextMeshProUGUI endScore_text;        // 게임이 끝났을 때 Score
 
 
     private void Awake()
